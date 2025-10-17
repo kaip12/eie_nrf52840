@@ -1,0 +1,140 @@
+==============================
+ GIT COMMANDS – SUMMARY NOTES
+==============================
+
+1. git commit
+------------------------------
+Purpose:
+    Saves your staged changes to the local repository (your commit history).
+
+Common Arguments:
+    -m "message"      → Adds a commit message inline.
+    -a                → Stages all tracked files before committing.
+
+Examples:
+    git commit -m/ "Added LED blink logic"
+    git commit -am "Fixed build warnings"
+
+Notes:
+    Without -m, Git opens your text editor to write a message.
+
+
+2. git branch
+------------------------------
+Purpose:
+    Lists, creates, renames, or deletes branches.
+
+Common Arguments:
+    (no arguments)    → Lists all branches.
+    <name>            → Creates a new branch.
+    -d <name>         → Deletes a branch.
+    -M <new-name>     → Renames a branch.
+
+Examples:
+    git branch
+    git branch lesson2
+    git branch -d old-feature
+
+Changes Function Based on Arguments:
+    Yes — with no args it lists, with args it creates/deletes.
+
+
+3. git checkout
+------------------------------
+Purpose:
+    Switches branches OR restores files to a previous state.
+
+Common Arguments:
+    <branch-name>     → Switches to another branch.
+    -b <branch-name>  → Creates and switches to a new branch.
+    <file>            → Discards local changes to that file.
+
+Examples:
+    git checkout main
+    git checkout -b new-feature
+    git checkout app/src/main.c
+
+Changes Function Based on Arguments:
+    Yes — with a branch name it switches, with a file name it reverts.
+
+
+4. git pull
+------------------------------
+Purpose:
+    Fetches changes from a remote repository and merges (or rebases) them
+    into your current branch.
+
+Common Arguments:
+    <remote> <branch> → Pulls explicitly from that branch.
+    --rebase          → Rebases instead of merging.
+
+Examples:
+    git pull
+    git pull origin main
+    git pull --rebase origin lesson2
+
+Notes:
+    Combines "git fetch" + "git merge" (by default).
+
+
+5. git push
+------------------------------
+Purpose:
+    Uploads local commits to a remote repository (like GitHub).
+
+Common Arguments:
+    <remote> <branch> → Pushes to a specific remote branch.
+    -u                → Sets the upstream branch for future pushes.
+    --force           → Overwrites the remote branch (use carefully!).
+
+Examples:
+    git push origin main
+    git push -u origin lesson2
+
+
+6. git merge
+------------------------------
+Purpose:
+    Integrates commits from another branch into the current branch.
+
+Common Arguments:
+    <branch>          → Merges that branch into the one you’re on.
+    --abort           → Cancels an in-progress merge.
+
+Examples:
+    git merge main
+    git merge feature-update
+    git merge --abort
+
+
+7. git rebase
+------------------------------
+Purpose:
+    Re-applies commits on top of another branch (creates a cleaner history).
+
+Common Arguments:
+    <branch>          → Rebases your current branch onto the target branch.
+    --continue        → Continues after resolving conflicts.
+    --abort           → Cancels the rebase.
+
+Examples:
+    git rebase main
+    git rebase --continue
+    git rebase --abort
+
+
+8. git fetch
+------------------------------
+Purpose:
+    Downloads new commits and branches from a remote, but does not merge.
+
+Common Arguments:
+    <remote>          → Fetches from a specific remote (e.g. origin, upstream).
+    --all             → Fetches from all remotes.
+
+Examples:
+    git fetch origin
+    git fetch --all
+
+Notes:
+    Use before merge or rebase to ensure you have the latest remote info.
