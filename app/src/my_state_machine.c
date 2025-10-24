@@ -53,7 +53,21 @@ static led_state_object_t led_state_object;
  static enum smf_state_result led_on_state_run(void* o){
     if(led_state_object.count > 500){
         led_state_object.count = 0;
-        smf_set_state_(SMF_CTX(&led_state_object), &led_states[LED_OFF_STATE]);
+        smf_set_state(SMF_CTX(&led_state_object), &led_states[LED_OFF_STATE]);
+    } else {
+        led_state_object.count++;
+    }
+    return SMF_EVENT_HANDLED;
+ }
+
+ static void led_off_state_entry(void* o){
+    LED_set(LED0, LED_OFF);
+ }
+ 
+ static enum smf_state_result led_off_state_run(void* o){
+    if (led_state_object.count > 500){
+        led_state_object.count = 0;
+        smf_set_state(SMF_CTX(&led_state_object), &led_states[LED_ON_STATE]);
     } else {
         led_state_object.count++;
     }
