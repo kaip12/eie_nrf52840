@@ -16,15 +16,12 @@
 
 #include "BTN.h"
 #include "LED.h"
+#include "my_state_machine.h"
 
-#ifndef LED0
-#define LED0 0
-#endif
-
-#define SLEEP_MS 50  /* small delay to debounce button polling */
+#define SLEEP_MS 1  
 
 int main(void) {
-    int ret;
+    
 
     if (0 > BTN_init()) {
         return 0;
@@ -33,13 +30,14 @@ int main(void) {
         return 0;
     }
 
+    state_machine_init();
+
     while (1) {
-        if (BTN_check_clear_pressed(BTN0)) {
-            LED_toggle(LED0);
-            printk("Button 0 pressed!\n");
+        int ret = state_machine_run();
+        if (0 > ret) {
+            return 0;
         }
         k_msleep(SLEEP_MS);
     }
-
     return 0;
 }

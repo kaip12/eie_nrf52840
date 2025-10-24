@@ -1,4 +1,8 @@
-zephyr_include_directories(BTN LED)
+cmake_minimum_required(VERSION 3.13.1)
+find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
-add_subdirectory(BTN)
-add_subdirectory(LED)
+project(app LANGUAGES C)
+zephyr_include_directories(src)
+
+target_sources(app PRIVATE src/main.c)
+target_sources(app PRIVATE src/my_state_machine.c)
